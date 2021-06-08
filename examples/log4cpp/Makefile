@@ -1,15 +1,12 @@
 CPP_SRCS = $(wildcard *.cc)
-OBJS = $(CPP_SRCS:%.cc=%.o)
-TARGET = test_log4cpp
+TARGET = $(CPP_SRCS:.cc=)
 
 CPPFLAGS = -Wall -std=c++11
 LD_FLAGS = -llog4cpp -lpthread
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
-	g++ $^ -o $(TARGET) $(LD_FLAGS)
-%.o: %.cc
-	g++ $(CPPFLAGS) -c $<
+%: %.cc
+	g++ $^ $(CPPFLAGS) -o $@ $(LD_FLAGS)
 clean:
-	rm -fr $(OBJS) $(TARGET)
+	rm -fr $(TARGET) log.txt
