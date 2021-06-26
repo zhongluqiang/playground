@@ -1,0 +1,19 @@
+# 演示subgraph中的cluster效果
+
+digraph {
+    node [shape=record];
+
+    subgraph cluster_0 {
+        node [style=filled];
+        label = "cluster 0";
+        color = blue;
+        a -> b;
+    }
+    
+    subgraph cluster_1 {
+        node [style=filled];
+        label = "cluster 1";
+        color = blue;
+        c -> d;
+    }
+}

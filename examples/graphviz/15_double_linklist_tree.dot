@@ -1,0 +1,33 @@
+# https://stackoverflow.com/questions/13898151/drawing-outgoing-edges-starting-from-the-center-of-record-elements-in-graphviz
+
+digraph G {
+    node [shape = record];
+    edge[headclip=false, tailclip=false];
+
+    node0 [ label ="<f0> | <f1> J | <f2> "];
+    node1 [ label ="<f0> | <f1> E | <f2> "];
+    node4 [ label ="<f0> | <f1> C | <f2> "];
+    node6 [ label ="<f0> | <f1> I | <f2> "];
+    node2 [ label ="<f0> | <f1> U | <f2> "];
+    node5 [ label ="<f0> | <f1> N | <f2> "];
+    node9 [ label ="<f0> | <f1> Y | <f2> "];
+    node8 [ label ="<f0> | <f1> W | <f2> "];
+    node10 [ label ="<f0> | <f1> Z | <f2> "];
+    node7 [ label ="<f0> | <f1> A | <f2> "];
+    node3 [ label ="<f0> | <f1> G | <f2> "];
+
+    // identical result: "node0" -> "node1";
+    "node0":f1:c -> "node1":f1:c;
+    "node0":f1:c -> "node2":f1:c;
+
+    "node1":f1:c -> "node4":f1:c;
+    "node1":f1:c -> "node6":f1:c;
+    "node4":f1:c -> "node7":f1:c;
+    "node4":f1:c -> "node3":f1:c;
+
+    "node2":f1:c -> "node5":f1:c;
+    "node2":f1:c -> "node9":f1:c;
+
+    "node9":f1:c -> "node8":f1:c;
+    "node9":f1:c -> "node10":f1:c;
+}

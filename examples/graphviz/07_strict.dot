@@ -1,0 +1,6 @@
+# strict关键字演示，用于消除重复的边，strict对有向和无向图都适用
+
+strict digraph {
+    a -> b;
+    a -> b;
+}

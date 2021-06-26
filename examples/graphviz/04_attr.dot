@@ -1,0 +1,12 @@
+# 节点和边的属性设置
+
+digraph G {
+    // label属性可以改变节点显示的名称
+    a [label = "Foo"];
+    // shape属性可以改变节点的形状
+    b [shape = box];
+    // color指定连接线的颜色
+    a -> b -> c [color = blue];
+    // style指定连接线的风格
+    b -> d [style = dotted];
+}

@@ -1,0 +1,18 @@
+# 控制边的起点位置和终点位置
+
+digraph {
+    // 统一将下面的节点设置成矩形
+    node [shape = box];
+    // 以节点中心位置作为边的起点和终点，不影响指定了起始位置的边
+    edge [headclip=false, tailclip=false];
+    // n/e/s/w分别表示north, east, south, west, 可组合使用
+    c0   ->  d0    
+    c1:n  -> d1    [label=n];
+    c2:ne -> d2:ne [label=ne];
+    c3:e  -> d3:ne [label=e];
+    c4:se -> d4:n  [label=se];
+    c5:s  -> d5:n  [label=s];
+    c6:sw -> d6:n  [label=sw];
+    c7:w  -> d7:nw [label=w];
+    c8:nw -> d8:nw [label=nw];
+}

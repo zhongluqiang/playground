@@ -1,0 +1,15 @@
+# 演示subgraph
+
+digraph {
+    node [shape=record];
+
+    subgraph sub_0 {
+        node [style=filled];
+        a -> b;
+    }
+    
+    subgraph sub_1 {
+        node [style=filled];
+        c -> d;
+    }
+}

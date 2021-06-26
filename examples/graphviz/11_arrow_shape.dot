@@ -1,0 +1,9 @@
+# 演示箭头形状
+
+digraph {
+    a0 -> b0                            // 默认是normal类型
+    a1 -> b1 [arrowhead=none]           // 无箭头
+    a2 -> b2 [arrowhead=diamond]        // 更新箭头为diamond
+    a3 -> b3 [dir=both arrowtail=diamond arrowhead=diamond] // 箭头和箭尾为diamond，只有dir为back或both才生效
+    a4 -> b4 [arrowhead=lteeoldiamond ] // 参考官方文档，空心，左半边，tee | diamond
+}

@@ -1,0 +1,14 @@
+# https://stackoverflow.com/questions/27504703/in-graphviz-how-do-i-align-an-edge-to-the-top-center-of-a-node
+
+graph {
+    splines=ortho;
+    {0, 1, 2, 3 [width=0, shape=point, style=invis];}
+    {rank=same; 1 -- 2 -- 3;}
+    0 -- 2;
+    node [shape=box];
+    {rank=same; A -- 0 -- B;}
+    1 -- C;
+    1 -- D;
+    3 -- E;
+    3 -- F;
+}

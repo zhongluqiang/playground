@@ -1,0 +1,8 @@
+# 边的方向
+
+digraph {
+    a -> b [dir = both];
+    b -> c [dir = none];
+    c -> d [dir = back];
+    d -> a [dir = forward];
+}

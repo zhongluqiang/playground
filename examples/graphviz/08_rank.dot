@@ -1,0 +1,11 @@
+# 演示rank的作用
+
+digraph {
+    "a" [color=blue]
+    "a" -> b -> c;
+    b -> d;
+    d -> e;
+
+    { rank=same; a b c};
+    { rank=same; d e};
+}
