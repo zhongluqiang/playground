@@ -1,0 +1,30 @@
+# 非对称协程
+
+digraph asymmetric_fiber {
+    rankdir=LR;
+    
+    subgraph main_fiber {
+        node [style=filled];
+        start [label="开始" shape=none style=""];
+        main1 [label = "主协程"];
+        main2 [label = "主协程"];
+        main3 [label = "主协程"];
+        main4 [label = "主协程"];
+        end [label="结束" shape=none style=""];
+        {rank=same; start main1 main2 main3 main4 end;}
+    }
+
+    sub1 [label="子协程1"];
+    sub2 [label="子协程2"];
+    sub3 [label="子协程3"];
+    {rank=same; sub1 sub2 sub3;}
+
+    start -> main1;
+    main1 -> sub1;
+    sub1 -> main2;
+    main2 -> sub2;
+    sub2 -> main3;
+    main3 -> sub3;
+    sub3 -> main4;
+    main4 -> end;
+}
