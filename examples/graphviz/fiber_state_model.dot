@@ -1,0 +1,11 @@
+# 协程三态模型
+
+digraph {
+a [label="READY"];
+b [label="RUNNING"];
+c [label="TERM"];
+
+a -> b;
+b -> a;
+b -> c;
+}

@@ -1,0 +1,36 @@
+# 非对称协程，bad example
+
+digraph asymmetric_fiber {
+    rankdir=LR;
+    
+    start [label="开始" shape=none style=""];
+    main1 [label = "主协程" style=filled];
+    main2 [label = "主协程" style=filled];
+    main3 [label = "主协程" style=filled];
+    main4 [label = "主协程" style=filled];
+    end [label="结束" shape=none style=""];
+    {rank=same; start main1 main2 main3 main4 end;}
+    
+
+    sub1 [label="子协程1"];
+    sub2 [label="子协程2"];
+    sub3 [label="子协程3"];
+    sub5 [label="子协程5"];
+    {rank=same; sub1 sub2 sub3 sub5;}
+
+    sub4 [label="子协程4"];
+    sub6 [label="子协程6"];
+    {rank=same; sub4 sub6;}
+
+    start -> main1;
+    main1 -> sub1;
+    sub1 -> main2;
+    main2 -> sub2;
+    sub2 -> main3;
+    main3 -> sub3;
+    sub3 -> sub4;
+    sub4 -> sub5;
+    sub5 -> sub6;
+    sub6 -> main4 [label="无法切回主协程" style=dotted];
+    main4 -> end;
+}
