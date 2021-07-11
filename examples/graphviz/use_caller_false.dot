@@ -1,0 +1,33 @@
+# use caller为false，调度协程切换过程
+
+digraph {
+    rankdir=LR;
+    node [style=filled];
+    compound=true;
+
+    subgraph sub1 {
+        start [label="main函数开始" shape=none style=""];
+        main1 [label = "创建调度器"];
+        main2 [label = "开始调度"];
+        main3 [label = "添加调度任务"];
+        main4 [label = <停止调度<BR/>(等待调度线程退出)>];
+        end [label="main函数结束" shape=none style=""];
+        rank=same;
+        start -> main1 -> main2 -> main3 -> main4 -> end;
+    }
+    subgraph sbu2 {
+        scheduler1 [label="调度协程" style=filled];
+        scheduler2 [label="调度协程" style=filled];
+        scheduler3 [label="调度协程" style=filled];
+        scheduler4 [label="调度协程" style=filled]
+        scheduler_end [label="结束"]
+        child1 [label="子协程1"]
+        child2 [label="子协程2"]
+        child3 [label="子协程3"]
+        
+        {rank=same; scheduler1 scheduler2 scheduler3 scheduler4 scheduler_end}
+        {rank=same; child1 child2 child3}
+    }
+    scheduler1->child1->scheduler2->child2->scheduler3->child3->scheduler4->scheduler_end;
+    main2->scheduler1[label="创建调度线程"];
+}

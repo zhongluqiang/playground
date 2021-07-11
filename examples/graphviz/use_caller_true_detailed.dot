@@ -1,0 +1,38 @@
+# use caller为true，调度协程切换过程
+
+digraph {
+    rankdir=LR;
+    node [style=filled];
+    compound=true;
+
+    subgraph sub1 {
+        start [label="main函数开始" shape=none style=""];
+        main1 [label = "创建调度器"];
+        main2 [label = <开始调度<BR/>(实际什么也没做)>];
+        main3 [label = "添加调度任务"];
+        main4 [label = <停止调度<BR/>>];
+        end [label="main函数结束" shape=none style=""];
+        rank=same;
+        start -> main1 -> main2 -> main3 -> main4 -> end;
+    }
+    subgraph sbu2 {
+        scheduler1 [label="调度协程" style=filled];
+        scheduler2 [label="调度协程" style=filled];
+        scheduler3 [label="调度协程" style=filled];
+        scheduler4 [label="调度协程" style=filled]
+        child1 [label="子协程1"]
+        child2 [label="子协程2"]
+        child3 [label="子协程3"]
+
+        {rank=same; scheduler1 scheduler2 scheduler3 scheduler4}
+        {rank=same; child1 child2 child3}
+    }
+    scheduler1->child1 [label=<swapcontext(scheduler_ctx, child1_ctx)>];
+    child1->scheduler2 [label=<swapcontext(child1_ctx, scheduler_ctx)>];
+    scheduler2->child2 [label=<swapcontext(scheduler_ctx, child2_ctx)>];
+    child2->scheduler3 [label=<swapcontext(child2_ctx, scheduler_ctx)>];
+    scheduler3->child3 [label=<swapcontext(scheduler_ctx, child3_ctx)>];
+    child3->scheduler4 [label=<swapcontext(child3_ctx, scheduler_ctx)>];
+    main4 -> scheduler1 [label=<切到调度协程<BR/>swapcontext(main_ctx, scheduler_ctx)>];
+    scheduler4 -> main4 [label=<全部任务执行结束后<BR/>调度协程返回main函数主协程<BR/>swapcontext(scheduler_ctx, main_ctx)>];
+}
