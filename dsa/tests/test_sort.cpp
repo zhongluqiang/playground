@@ -1,7 +1,7 @@
 /**
  * @file test_sort.cpp
  * @author midlane.top
- * @brief 排序算法测试
+ * @brief 测试排序算法
  * @version 0.1
  * @date 2021-11-03
  * 
@@ -19,11 +19,11 @@
 #include <ctime>      // time
 #include <sys/time.h> // gettimeofday
 
-using namespace std;
+using std::random_shuffle;
 
 /**
  * @brief 使用大小为SIZE的随机数组测试排序算法XX
- * @details 设置a[] b[]两个大小一致的数组，先对a[]进行冒泡排序，将排序结果存储在b[]中，
+ * @details 设置a[] b[]两个大小一致的数组，先对a[]进行简单排序，将排序结果存储在b[]中，
  *          然后重复打乱a[]并执行XX排序，再与b[]进行比较，看结果是否一致
  */
 #define TEST(XX, SIZE)                            \
@@ -31,7 +31,7 @@ using namespace std;
         printf("%s start\n", #XX);                \
         int a[SIZE], b[SIZE];                     \
         randomize(a, SIZE);                       \
-        bubbleSort(a, SIZE);                      \
+        simpleSort(a, SIZE);                      \
         memcpy(b, a, sizeof(a));                  \
         for (int i = 0; i < 20000; i++) {         \
             random_shuffle(a, a + SIZE);          \
@@ -81,21 +81,28 @@ void simple_test() {
     quickSort(a, 10);
     trace(a, 10);
     assert(isAscending(a, 10));
+
+    printf("quickSort2:\n");
+    random_shuffle(a, a + 10);
+    trace(a, 10);
+    quickSort2(a, 10);
+    trace(a, 10);
+    assert(isAscending(a, 10));
 }
 
 int main() {
     srand(time(0));
 
-    setTraceSoreEnable(true);
-    //simple_test();
+    setTraceSortEnable(true);
+    simple_test();
 
-    setTraceSoreEnable(false);
-    TEST(simpleSort, 100);
+    setTraceSortEnable(false);
     TEST(bubbleSort, 100);
     TEST(insertSort, 100);
     TEST(selectSort, 100);
     TEST(mergeSort, 100);
-    //TEST(quickSort3, 100);
     TEST(quickSort, 100);
+    TEST(quickSort2, 100);
+    TEST(quickSort3, 100);
     return 0;
 }

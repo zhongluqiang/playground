@@ -26,8 +26,14 @@ int partition_m(int a[], int left, int right);
  */
 int partition_r(int a[], int left, int right);
 
+/**
+ * @brief 形式一，左边<=基准值<=右边，返回基准值下标
+ */
 int partition1(int a[], int left, int right);
 
+/**
+ * @brief 形式二，左边<=右边，返回左边的结束位置
+ */
 int partition2(int a[], int left, int right);
 
 #endif

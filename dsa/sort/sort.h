@@ -13,17 +13,51 @@
 
 /**
  * @brief 开关排序步骤的打印
- * 
- * @param v 
  */
 void setTraceSortEnable(bool v);
 
+/**
+ * @brief 简单排序
+ */
 void simpleSort(int a[], int n);
+
+/**
+ * @brief 冒泡排序
+ */
 void bubbleSort(int a[], int n);
+
+/**
+ * @brief 选择排序
+ */
 void selectSort(int a[], int n);
+
+/**
+ * @brief 插入排序
+ */
 void insertSort(int a[], int n);
+
+/**
+ * @brief 希尔排序
+ */
 void shellSort(int a[], int n);
+
+/**
+ * @brief 归并排序
+ */
 void mergeSort(int a[], int n);
+
+/**
+ * @brief 快速排序，分割成"左边<=基准值<=右边"的形式
+ */
 void quickSort(int a[], int n);
+
+/**
+ * @brief 快速排序，分割成"左边<=右边"的形式
+ */
+void quickSort2(int a[], int n);
+
+/**
+ * @brief 快速排序，quickSort2简化版
+ */
 void quickSort3(int a[], int n);
 #endif

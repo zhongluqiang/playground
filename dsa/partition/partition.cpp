@@ -64,7 +64,7 @@ int partition_r(int a[], int left, int right) {
 }
 
 /**
- * @brief 以数组第一个元素作为基准值将数组分割成"左边 基准值 右边"的形式，满足"左边<=基准值<=右边"
+ * @brief 形式一，以数组第一个元素作为基准值将数组分割成"左边 基准值 右边"的形式，满足"左边<=基准值<=右边"
  * @return 分割后的基准值下标
  */
 int partition1(int a[], int left, int right) {
@@ -87,19 +87,19 @@ int partition1(int a[], int left, int right) {
     return left;
 }
 
-#include <cstdio>
-// 形式2
+/**
+ * @brief 形式二，以数组第一个元素作为基准值将数组分割成"左边 右边"的形式，满足"左边<=右边"
+ * @return 分割后左部分的结束位置
+ * @note 这个算法可以以任何元素作为pivot，结果都是正确的
+ */
 int partition2(int a[], int left, int right) {
-    //int pivot = a[(left + right) >> 1];
-    int pivot = a[right];
-    //printf("pivot=%d\n", pivot);
+    int pivot = a[left];
     int i = left-1, j = right+1;
     while(i < j) {
-        while(a[++i] < pivot);
-        while(a[--j] > pivot);
+        while(a[++i] < pivot); // 比较一
+        while(a[--j] > pivot); // 比较二
         if(i < j) {
             swap(a[i], a[j]);
-            //trace(a, right - left + 1);
         }
     }
     return j;

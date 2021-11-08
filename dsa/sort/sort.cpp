@@ -165,15 +165,15 @@ static void merge(int a[], int left, int mid, int right) {
 }
 
 /**
- * @brief 归并排序辅函数
+ * @brief 归并排序，区间形式
  */
-static void mSort(int a[], int left, int right) {
+void mergeSort(int a[], int left, int right) {
     if (left >= right) {
         return;
     }
     int mid = (left + right) >> 1;
-    mSort(a, left, mid);
-    mSort(a, mid + 1, right);
+    mergeSort(a, left, mid);
+    mergeSort(a, mid + 1, right);
     merge(a, left, mid, right);
 }
 
@@ -181,13 +181,13 @@ static void mSort(int a[], int left, int right) {
  * @brief 归并排序
  */
 void mergeSort(int a[], int n) {
-    mSort(a, 0, n - 1);
+    mergeSort(a, 0, n - 1);
 }
 
 /**
- * @brief 快速排序辅函数
+ * @brief 快速排序，区间形式
  */
-static void qSort(int a[], int left, int right) {
+void quickSort(int a[], int left, int right) {
     if (left >= right) {
         return;
     }
@@ -196,54 +196,63 @@ static void qSort(int a[], int left, int right) {
         printf("mid=%d, left=%d, right=%d\n", mid, left, right);
         trace(a, right-left+1);
     }
-    qSort(a, left, mid - 1);
-    qSort(a, mid + 1, right);
+    quickSort(a, left, mid - 1);
+    quickSort(a, mid + 1, right);
 }
 
 /**
  * @brief 快速排序
  */
 void quickSort(int a[], int n) {
-    qSort(a, 0, n - 1);
+    quickSort(a, 0, n - 1);
 }
 
-void qSort2(int q[], int n, int l, int r) {
-    if (l >= r)
+/**
+ * @brief 快速排序，区间形式，形式二分割算法
+ */
+void quickSort2(int a[], int left, int right) {
+    if (left >= right) {
         return;
-    int t = q[(l + r) >> 1];
-    int i = l - 1, j = r + 1;
-    while (i < j) {
-        do
-            (i++);
-        while (q[i] < t);
-        do
-            (j--);
-        while (q[j] > t);
-        if (i < j)
-            swap(q[i], q[j]);
     }
-    qSort2(q, n, l, j);
-    qSort2(q, n, j + 1, r);
+    int mid = partition2(a, left, right);
+    if(enable_trace) {
+        printf("mid=%d, left=%d, right=%d\n", mid, left, right);
+        trace(a, right-left+1);
+    }
+    quickSort2(a, left, mid);
+    quickSort2(a, mid+1, right);
 }
 
-void qSort3(int a[], int left, int right) {
+/**
+ * @brief 快速排序，形式二分割算法
+ */
+void quickSort2(int a[], int n) {
+    quickSort2(a, 0, n - 1);
+}
+
+/**
+ * @brief 快速排序，简化版，区间形式
+ */
+void quickSort3(int a[], int left, int right) {
     if(left >= right) {
         return;
     }
-    int pivot = a[(left + right) >> 1];
-    int i = left-1, j = right+1;
+    int pivot = a[left];
+    int i = left - 1, j = right + 1;
     while(i < j) {
         while(a[++i] < pivot);
         while(a[--j] > pivot);
         if(i < j) {
             swap(a[i], a[j]);
-            //trace(a, right - left + 1);
         }
     }
-    qSort3(a, left, j);
-    qSort3(a, j+1, right);
+    quickSort3(a, left, j);
+    quickSort3(a, j + 1, right);
 }
 
+/**
+ * @brief 快速排序，简化版
+ */
 void quickSort3(int a[], int n) {
-    qSort3(a, 0, n-1);
+    quickSort3(a, 0, n - 1);
 }
